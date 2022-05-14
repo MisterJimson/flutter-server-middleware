@@ -1,0 +1,44 @@
+{
+  "https://flutter-seo.vercel.app": {
+    "downstreamUrl": "https://flutter-seo-example.vercel.app",
+    "routes": [
+      {
+        "path": "/",
+        "headTags": [
+          "<meta name=\"description\" content=\"Jason's Movie Reviews. The best place to get in depth reviews of movies of all genres and styles.\">",
+          "<link rel=\"canonical\" href=\"https://flutter-seo-example.vercel.app\">"
+        ],
+        "bodyTags": []
+      },
+      {
+        "path": "/review/avengers-endgame",
+        "headTags": [
+          "<meta name=\"description\" content=\"A full movie review of Avengers Endgame on Jason's Movie Reviews.\">",
+          "<link rel=\"canonical\" href=\"https://flutter-seo-example.vercel.app/review/avengers-endgame\">"
+        ],
+        "bodyTags": ["<noscript>Great movie! Crazy start to finish!</noscript>"]
+      }
+    ]
+  },
+  "http://localhost:3000": {
+    "downstreamUrl": "https://flutter-seo-example.vercel.app",
+    "routes": [
+      {
+        "path": "/",
+        "headTags": [
+          "<meta name=\"description\" content=\"Jason's Movie Reviews. The best place to get in depth reviews of movies of all genres and styles.\">",
+          "<link rel=\"canonical\" href=\"https://flutter-seo-example.vercel.app\">"
+        ],
+        "bodyTags": []
+      },
+      {
+        "path": "/review/avengers-endgame",
+        "headTags": [
+          "<meta name=\"description\" content=\"A full movie review of Avengers Endgame on Jason's Movie Reviews.\">",
+          "<link rel=\"canonical\" href=\"https://flutter-seo-example.vercel.app/review/avengers-endgame\">"
+        ],
+        "bodyTags": ["<noscript>Great movie! Crazy start to finish!</noscript>"]
+      }
+    ]
+  }
+}
