@@ -20,7 +20,7 @@
       }
     ]
   },
-  "http://movies.flutterseo.com": {
+  "https://movies.flutterseo.com": {
     "downstreamUrl": "https://flutter-seo-example.vercel.app",
     "routes": [
       {
