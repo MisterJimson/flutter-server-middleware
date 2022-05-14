@@ -34,6 +34,9 @@ export default async function middleware(req) {
     return new NextResponse(result, {
       headers: externalContent.headers,
     });
+    // temporary solution
+  } else if (url.pathname === "/sitemap.xml") {
+    return NextResponse.next();
   } else {
     return NextResponse.rewrite(externalUrl);
   }
