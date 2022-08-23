@@ -20,10 +20,10 @@ export default async function middleware(req) {
     (e) => e.path === url.pathname
   );
 
+  const SITE_URL = process.env.VERCEL_URL || process.env.SITE_URL;
+
   if (routeMapping) {
-    return NextResponse.rewrite(
-      `${process.env.SITE_URL}/api/modify-response?url=${url}`
-    );
+    return NextResponse.rewrite(`${SITE_URL}/api/modify-response?url=${url}`);
   }
 
   // If we get traffic from a a route without mapping, rewrite the external content.
