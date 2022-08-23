@@ -1,15 +1,17 @@
 import { NextResponse } from "next/server";
-import mapping from "../seoMapping.json";
+import mapping from "../../seoMapping.json";
 
-export default async function middleware(req) {
-  const url = req.nextUrl.clone();
+export default async function handler(req, res) {
+  const urlFromParam = req.query.url;
+  const url = new URL(urlFromParam);
 
+  // If we get traffic from an unknown origin, redirect to the 404 page.
   if (!mapping[url.origin]) {
     return NextResponse.redirect(url.origin + "/404");
   }
 
+  // If we get traffic from an origin that has a route mapping, process the content here.
   const externalUrl = `${mapping[url.origin].downstreamUrl}${url.pathname}`;
-
   const routeMapping = mapping[url.origin].routes.find(
     (e) => e.path === url.pathname
   );
@@ -31,10 +33,10 @@ export default async function middleware(req) {
     let result = externalContentString.replace("<head>", additionalHeadTags);
     result = result.replace("<body>", additionalBodyTags);
 
-    return new NextResponse(result, {
-      headers: externalContent.headers,
-    });
-  } else {
-    return NextResponse.rewrite(externalUrl);
+    res.setHeader("flutter-seo", "true");
+    return res.status(200).send(result);
   }
+
+  // This shouldn't happen, may need to add an API key to prevent misuse.
+  return res.status(500).send("No route mapping found in API call");
 }
