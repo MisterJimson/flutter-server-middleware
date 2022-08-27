@@ -115,6 +115,6 @@ const reviews = [
       'Fantasic story, mind bending and amazing performances!',
       9),
   MovieReview('the-shawshank-redemption', 'The Shawshank Redemption',
-      'Great movie!', 9),
+      'Great movie! Love the ending.', 9),
   MovieReview('the-godfather', 'The Godfather', 'Great movie!', 9),
 ];
