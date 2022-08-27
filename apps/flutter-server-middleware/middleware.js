@@ -4,6 +4,11 @@ import mapping from "./seoMapping.json";
 export default async function middleware(req) {
   const url = req.nextUrl;
 
+  // Don't run any of our middleware for the primary domain
+  if (url.origin === process.env.SITE_URL) {
+    return NextResponse.next();
+  }
+
   // This prevents looping as the content is already processed by the API route.
   if (req.headers.get("flutter-seo") === "true") {
     return NextResponse.next();
