@@ -4,8 +4,20 @@ import mapping from "./seoMapping.json";
 export default async function middleware(req) {
   const url = req.nextUrl;
 
-  // Don't run any of our middleware for the primary domain
-  if (url.origin === process.env.SITE_URL) {
+  // Don't run any of our middleware for the primary domain, unless running locally and hitting api routes.
+  const requestIsForPrimaryDomain = url.origin === process.env.SITE_URL;
+  const requestIsForApi = url.pathname.startsWith("/api");
+
+  if (
+    requestIsForPrimaryDomain &&
+    process.env.NODE_ENV === "development" &&
+    requestIsForApi
+  ) {
+    return NextResponse.next();
+  } else if (
+    process.env.NODE_ENV === "production" &&
+    requestIsForPrimaryDomain
+  ) {
     return NextResponse.next();
   }
 
