@@ -21,7 +21,7 @@
     ]
   },
   "http://localhost:3000": {
-    "downstreamUrl": "https://flutter-seo-example.vercel.app",
+    "downstreamUrl": "http://localhost:3001",
     "routes": [
       {
         "path": "/",
@@ -37,7 +37,10 @@
           "<meta name=\"description\" content=\"A full movie review of Avengers Endgame on Jason's Movie Reviews.\">",
           "<link rel=\"canonical\" href=\"https://flutter-seo-example.vercel.app/review/avengers-endgame\">"
         ],
-        "bodyTags": ["<noscript>Great movie! Crazy start to finish!</noscript>"]
+        "bodyTags": [
+          "<noscript>Great movie! Crazy start to finish!</noscript>"
+        ],
+        "data": "<script id=\"__FSM_DATA__\" type=\"application/json\">{\"slug\":\"avengers-endgame\",\"title\":\"Avengers: Endgame\",\"review\":\"Great movie! Crazy start to finish!\",\"rating\":9}</script>"
       }
     ]
   }

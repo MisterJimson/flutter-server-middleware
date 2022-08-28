@@ -25,10 +25,14 @@ export default async function handler(req, res) {
       "<head>\n"
     );
 
-    const additionalBodyTags = routeMapping.bodyTags.reduce(
+    let additionalBodyTags = routeMapping.bodyTags.reduce(
       (prev, curr) => prev + curr + "\n",
       "<body>\n"
     );
+
+    if (routeMapping.data) {
+      additionalBodyTags += routeMapping.data;
+    }
 
     let result = externalContentString.replace("<head>", additionalHeadTags);
     result = result.replace("<body>", additionalBodyTags);
