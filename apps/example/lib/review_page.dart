@@ -22,6 +22,9 @@ class _ReviewPageState extends State<ReviewPage> {
   late MovieReview review;
   bool isLoading = true;
 
+  // for demo purposes, hide page content for refresh testing
+  bool setAllContentBlank = false;
+
   @override
   void initState() {
     super.initState();
@@ -46,6 +49,14 @@ class _ReviewPageState extends State<ReviewPage> {
 
   @override
   Widget build(BuildContext context) {
+    return setAllContentBlank
+        ? Container(
+            color: Colors.white,
+          )
+        : _buildReview(context);
+  }
+
+  Widget _buildReview(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: GestureDetector(
@@ -71,6 +82,15 @@ class _ReviewPageState extends State<ReviewPage> {
                     review.review,
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
+                  const SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        setAllContentBlank = true;
+                      });
+                    },
+                    child: const Text("Set all content blank for testing"),
+                  )
                 ],
               ),
       ),
