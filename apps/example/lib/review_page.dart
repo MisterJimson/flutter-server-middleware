@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_server_middleware_example/api.dart';
 import 'package:flutter_server_middleware_example/models.dart';
 import 'package:flutter_server_middleware_example/util.dart';
+import 'package:go_router/go_router.dart';
 
 class ReviewPage extends StatefulWidget {
   final String slug;
@@ -22,30 +23,38 @@ class _ReviewPageState extends State<ReviewPage> {
   bool isLoading = true;
 
   @override
-  void initState() async {
+  void initState() {
     super.initState();
+    getData();
+  }
 
-    var reviewData = await getData();
+  Future<void> getData() async {
+    MovieReview reviewData;
+
+    var middlewareData = getMiddlewareData();
+    if (middlewareData == null) {
+      reviewData = await getMovieBySlug(widget.slug);
+    } else {
+      reviewData = MovieReview.fromJson(middlewareData);
+    }
+
     setState(() {
       isLoading = false;
       review = reviewData;
     });
   }
 
-  FutureOr<MovieReview> getData() async {
-    var middlewareData = getMiddlewareData();
-    if (middlewareData == null) {
-      var data = await getMovieBySlug(widget.slug);
-      return data;
-    } else {
-      return MovieReview.fromJson(middlewareData);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Jason's Movie Reviews")),
+      appBar: AppBar(
+        title: GestureDetector(
+          child: const Text("Jason's Movie Reviews"),
+          onTap: () {
+            GoRouter.of(context).go('/');
+          },
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: isLoading
